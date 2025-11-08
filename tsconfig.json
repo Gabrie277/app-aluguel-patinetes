@@ -13,13 +13,7 @@
     "**/*.tsx",
     ".expo/types/**/*.ts",
     "expo-env.d.ts",
-<<<<<<< HEAD
     "nativewind-env.d.ts",
     "types/**/*.d.ts"
   ]
 }
-=======
-    "nativewind-env.d.ts"
-, "app/screens/inicio-corrida/index.jsx"  ]
-}
->>>>>>> upstream
