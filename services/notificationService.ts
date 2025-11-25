@@ -47,11 +47,12 @@ export class NotificationService {
    * Enviar notificação local
    */
   static async sendLocalNotification(
-    notification: RentalNotification
+    notification: RentalNotification,
+    userId?: string
   ): Promise<string | null> {
     try {
-      // Verificar configurações do usuário
-      const settings = await getNotificationSettings();
+      // Verificar configurações do usuário (aceita userId opcional)
+      const settings = await getNotificationSettings(userId);
       
       // Se notificações estão desabilitadas, não enviar
       if (!settings.enableNotifications) {
@@ -96,7 +97,8 @@ export class NotificationService {
    */
   static scheduleRentalEndingNotifications(
     rentalId: string,
-    durationInMinutes: number
+    durationInMinutes: number,
+    userId?: string
   ): void {
     // Limpar timers anteriores se existirem
     this.cancelRentalNotifications(rentalId);
@@ -104,15 +106,18 @@ export class NotificationService {
     // Notificação com 15 minutos restantes
     if (durationInMinutes > 15) {
       const timeout15 = setTimeout(() => {
-        this.sendLocalNotification({
-          id: `${rentalId}-15min`,
-          type: 'rental-ending-soon',
-          title: '⏰ Aluguel terminando em breve',
-          body: 'Faltam 15 minutos para o fim do aluguel!',
-          timeRemaining: 15,
-          timestamp: new Date(),
-          isRead: false,
-        });
+        this.sendLocalNotification(
+          {
+            id: `${rentalId}-15min`,
+            type: 'rental-ending-soon',
+            title: '⏰ Aluguel terminando em breve',
+            body: 'Faltam 15 minutos para o fim do aluguel!',
+            timeRemaining: 15,
+            timestamp: new Date(),
+            isRead: false,
+          },
+          userId
+        );
       }, (durationInMinutes - 15) * 60 * 1000);
 
       this.notificationTimers.set(`${rentalId}-15min`, timeout15);
@@ -121,15 +126,18 @@ export class NotificationService {
     // Notificação com 5 minutos restantes
     if (durationInMinutes > 5) {
       const timeout5 = setTimeout(() => {
-        this.sendLocalNotification({
-          id: `${rentalId}-5min`,
-          type: 'rental-ending-soon',
-          title: '⏰ Aluguel terminando em breve',
-          body: 'Faltam apenas 5 minutos para o fim do aluguel!',
-          timeRemaining: 5,
-          timestamp: new Date(),
-          isRead: false,
-        });
+        this.sendLocalNotification(
+          {
+            id: `${rentalId}-5min`,
+            type: 'rental-ending-soon',
+            title: '⏰ Aluguel terminando em breve',
+            body: 'Faltam apenas 5 minutos para o fim do aluguel!',
+            timeRemaining: 5,
+            timestamp: new Date(),
+            isRead: false,
+          },
+          userId
+        );
       }, (durationInMinutes - 5) * 60 * 1000);
 
       this.notificationTimers.set(`${rentalId}-5min`, timeout5);
@@ -137,14 +145,17 @@ export class NotificationService {
 
     // Notificação quando o tempo acabou
     const timeoutEnd = setTimeout(() => {
-      this.sendLocalNotification({
-        id: `${rentalId}-ended`,
-        type: 'rental-ended',
-        title: '⏱️ Tempo do aluguel expirado',
-        body: 'O tempo do seu aluguel já acabou. Dirija-se até a estação de devolução!',
-        timestamp: new Date(),
-        isRead: false,
-      });
+      this.sendLocalNotification(
+        {
+          id: `${rentalId}-ended`,
+          type: 'rental-ended',
+          title: '⏱️ Tempo do aluguel expirado',
+          body: 'O tempo do seu aluguel já acabou. Dirija-se até a estação de devolução!',
+          timestamp: new Date(),
+          isRead: false,
+        },
+        userId
+      );
     }, durationInMinutes * 60 * 1000);
 
     this.notificationTimers.set(`${rentalId}-ended`, timeoutEnd);
