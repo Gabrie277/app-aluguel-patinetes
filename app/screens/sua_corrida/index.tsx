@@ -1,3 +1,4 @@
+import usuario from "@/data/usuario.json";
 import { useRentalNotifications } from "@/hooks/useRentalNotifications";
 import * as Notifications from "expo-notifications";
 import { router } from "expo-router";
@@ -23,7 +24,9 @@ export default function SuaCorrida() {
     rentalId,
     durationInMinutes,
     handleNotificationReceived,
-    handleNotificationPressed
+    handleNotificationPressed,
+    // Pass user id so notification settings are applied per-user
+    usuario.id
   );
 
   return (

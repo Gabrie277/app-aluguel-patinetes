@@ -13,7 +13,8 @@ export function useRentalNotifications(
   rentalId: string,
   durationInMinutes: number,
   onNotificationReceived?: (notification: Notifications.Notification) => void,
-  onNotificationPressed?: (response: Notifications.NotificationResponse) => void
+  onNotificationPressed?: (response: Notifications.NotificationResponse) => void,
+  userId?: string
 ) {
   const subscriptions = useRef<Notifications.Subscription[]>([]);
 
@@ -22,7 +23,7 @@ export function useRentalNotifications(
     const setupNotifications = async () => {
       const hasPermission = await NotificationService.requestPermissions();
       if (hasPermission) {
-        NotificationService.scheduleRentalEndingNotifications(rentalId, durationInMinutes);
+        NotificationService.scheduleRentalEndingNotifications(rentalId, durationInMinutes, userId);
       }
     };
 
