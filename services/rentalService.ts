@@ -38,3 +38,5 @@ export function subscribeToRentalChanges(userId: string, callback: (rental: any)
   // Return an unsubscribe function placeholder
   return () => {};
 }
+
+

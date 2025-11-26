@@ -23,6 +23,8 @@ export default function Teste() {
           <Text className="text-white font-bold text-lg">Cadastrar</Text>
         </TouchableOpacity>
       </Link>
+
+      
     </View>
   );
 }

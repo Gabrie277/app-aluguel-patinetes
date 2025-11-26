@@ -29,6 +29,8 @@ export default function SuaCorrida() {
     usuario.id
   );
 
+  // No React Query hooks removed from this screen — keep only core logic
+
   return (
     <View className="flex-1 bg-gray-50 px-4 pt-14">
 
@@ -77,6 +79,8 @@ export default function SuaCorrida() {
       <Text className="text-center text-gray-600 mb-4">
         Patinete #ABCD-123
       </Text>
+
+      {/* Removed React Query demo section */}
 
       {/* Botão de Encerrar */}
       <TouchableOpacity

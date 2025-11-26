@@ -1,8 +1,10 @@
 import { Stack } from "expo-router";
+import ReactQueryProvider from './providers/ReactQueryProvider';
 
 export default function RootLayout() {
   return (
-    <Stack screenOptions={{ headerShown: false }}>
+    <ReactQueryProvider>
+      <Stack screenOptions={{ headerShown: false }}>
       <Stack.Screen name="index" options={{ title: "App" }} />
       <Stack.Screen name="configuracoes-usuario" options={{ title: "Configurações do Usuário" }} />
       <Stack.Screen name="screens/notificacoes/index" options={{ title: "Notificações" }} />
@@ -17,6 +19,7 @@ export default function RootLayout() {
         name="screens/detalhes-patinete/[id]/index"
         options={{ title: "Detalhes do Patinete" }}
       />
-    </Stack>
+      </Stack>
+    </ReactQueryProvider>
   );
 }
