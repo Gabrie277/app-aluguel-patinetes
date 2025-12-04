@@ -3,15 +3,14 @@
   "compilerOptions": {
     "strict": true,
     "jsx": "react-jsx",
+    "baseUrl": ".", 
     "paths": {
-      "@/*": ["./*"]
-    },
-    "resolveJsonModule": true,
-    "allowSyntheticDefaultImports": true
+      "@/*": ["src/*"]
+    }
   },
   "include": [
-    "**/*.ts",
-    "**/*.tsx",
+    "src/**/*.ts",
+    "src/**/*.tsx",
     ".expo/types/**/*.ts",
     "expo-env.d.ts",
     "nativewind-env.d.ts",
