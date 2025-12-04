@@ -39,4 +39,23 @@ export function subscribeToRentalChanges(userId: string, callback: (rental: any)
   return () => {};
 }
 
+// Placeholder for creating a rental. Integrator should implement real logic
+// using Supabase or another backend. This helper simulates a created rental
+// so mutation hooks can be tested locally.
+export async function createRental(userId: string, durationInMinutes: number) {
+  console.warn('createRental placeholder called — implement with Supabase for production.');
+  return new Promise((resolve) => {
+    const now = new Date();
+    const endsAt = new Date(now.getTime() + durationInMinutes * 60 * 1000).toISOString();
+    setTimeout(() =>
+      resolve({
+        rentalId: `rental_${Date.now()}`,
+        durationInMinutes,
+        startAt: now.toISOString(),
+        endsAt,
+      }),
+    300);
+  });
+}
+
 
