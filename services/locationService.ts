@@ -1,6 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as Location from 'expo-location';
-import { supabase } from '@/config/supabaseConfig';
+import { supabase, isSupabaseConfigured } from '@/config/supabaseConfig';
 
 export interface LocationData {
   latitude: number;
@@ -198,6 +198,10 @@ class LocationService {
    */
   static async syncLocationToSupabase(location: LocationData): Promise<void> {
     try {
+      // Se não estiver configurado, não tentar conectar ao Supabase
+      if (!isSupabaseConfigured) {
+        return;
+      }
       // Verificar se o usuário está autenticado
       const {
         data: { user },
