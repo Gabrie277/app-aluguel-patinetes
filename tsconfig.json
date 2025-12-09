@@ -1,12 +1,20 @@
 {
-  "extends": "expo/tsconfig.base",
   "compilerOptions": {
+    "target": "ESNext",
+    "module": "ESNext",
+    "lib": ["ESNext", "DOM"],
+    "jsx": "react-jsx",
+    "moduleResolution": "node",
+    "allowJs": true,
     "strict": true,
+    "baseUrl": ".",
     "paths": {
       "@/*": ["./*"]
     },
     "resolveJsonModule": true,
-    "allowSyntheticDefaultImports": true
+    "allowSyntheticDefaultImports": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true
   },
   "include": [
     "**/*.ts",
