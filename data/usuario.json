@@ -1,5 +1,13 @@
 {
+  "id": "user-001",
   "nome": "Maria Souza",
   "email": "maria.souza@email.com",
-  "telefone": "(11) 98765-4321"
+  "telefone": "(11) 98765-4321",
+  "saldo": 150.00,
+  "ativo": true,
+  "notificationSettings": {
+    "enableNotifications": true,
+    "enableSoundNotifications": true,
+    "enableVibration": true
+  }
 }

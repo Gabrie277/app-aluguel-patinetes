@@ -1,7 +1,36 @@
+import usuario from "@/data/usuario.json";
+import { useRentalNotifications } from "@/hooks/useRentalNotifications";
+import * as Notifications from "expo-notifications";
 import { router } from "expo-router";
 import { Image, Text, TouchableOpacity, View } from "react-native";
 
 export default function SuaCorrida() {
+  // Mock de ID de corrida e duração
+  // Em uma aplicação real, esses valores viriam de um contexto/estado global ou rota params
+  const rentalId = "rental-001";
+  const durationInMinutes = 30; // Exemplo: 30 minutos de aluguel
+
+  // Callbacks para quando notificações são recebidas ou pressionadas
+  const handleNotificationReceived = (notification: Notifications.Notification) => {
+    console.log("Notificação recebida:", notification);
+  };
+
+  const handleNotificationPressed = (response: Notifications.NotificationResponse) => {
+    console.log("Notificação pressionada:", response);
+  };
+
+  // Usar o hook para gerenciar notificações de aluguel
+  useRentalNotifications(
+    rentalId,
+    durationInMinutes,
+    handleNotificationReceived,
+    handleNotificationPressed,
+    // Pass user id so notification settings are applied per-user
+    usuario.id
+  );
+
+  // No React Query hooks removed from this screen — keep only core logic
+
   return (
     <View className="flex-1 bg-gray-50 px-4 pt-14">
 
@@ -50,6 +79,8 @@ export default function SuaCorrida() {
       <Text className="text-center text-gray-600 mb-4">
         Patinete #ABCD-123
       </Text>
+
+      {/* Removed React Query demo section */}
 
       {/* Botão de Encerrar */}
       <TouchableOpacity

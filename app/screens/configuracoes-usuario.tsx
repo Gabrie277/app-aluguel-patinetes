@@ -1,7 +1,7 @@
-import { View, Text, TextInput, TouchableOpacity } from "react-native";
-import { Link, useRouter } from "expo-router";
-import { ArrowLeft, Pencil, Bell, CreditCard, Shield, HelpCircle, FileText } from "lucide-react-native";
 import usuario from "@/data/usuario.json";
+import { Link, useRouter } from "expo-router";
+import { ArrowLeft, Bell, CreditCard, FileText, HelpCircle, Pencil, Shield } from "lucide-react-native";
+import { Text, TextInput, TouchableOpacity, View } from "react-native";
 
 export default function ConfiguracoesUsuario() {
   const router = useRouter();
@@ -71,7 +71,7 @@ export default function ConfiguracoesUsuario() {
       <View className="mt-6">
         <Text className="text-lg font-semibold mb-3 text-gray-800">Ajustes da Conta</Text>
 
-        <Link href="../(tabs)/notificacoes" asChild>
+        <Link href="./notificacoes" asChild>
           <TouchableOpacity className="flex-row items-center py-3 border-b border-gray-200">
             <Bell color="#3B82F6" size={22} />
             <Text className="ml-3 text-gray-700 text-base">Notificações</Text>

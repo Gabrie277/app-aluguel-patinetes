@@ -1,3 +1,5 @@
+import { NotificationSettings } from "@/types/notifications";
+
 export interface User {
   id: string;
   nome: string;
@@ -5,4 +7,5 @@ export interface User {
   telefone?: string;
   saldo: number;
   ativo: boolean;
+  notificationSettings?: NotificationSettings;
 }
